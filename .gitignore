@@ -1,0 +1,5 @@
+venv/
+__pycache__/
+*.pyc
+GestureCanvas_*.png
+.DS_Store
