@@ -1,94 +1,76 @@
 # GestureCanvas
 
-A real-time, hand-tracking drawing app — no mouse, no stylus, just your fingers in front of a webcam.
+Sebuah real-time digital canvas yang dikendalikan oleh gesture tangan. Proyek ini saya buat untuk mengeksplorasi Computer Vision (CV) dengan Python, tanpa perlu mouse atau stylus. Kamu hanya cukup menggerakkan jari di depan kamera untuk melukis, menghapus, menggeser canvas, hingga mengatur zoom.
 
-Built with **OpenCV** + **MediaPipe**, GestureCanvas turns hand gestures into a full-featured digital canvas: draw, erase, move, zoom (with two hands!), undo, and toggle visual effects like glow trails and rainbow strokes — all live over your camera feed.
+Proyek ini dibangun di atas OpenCV dan MediaPipe, dengan pendekatan modular untuk memisahkan logika deteksi tangan dari rendering engine-nya.
 
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10.9-orange)
 
-<!-- Optional: drop a demo GIF or screenshot here once you have one -->
-<!-- ![demo](assets/demo.gif) -->
+## Fitur
 
----
+**Intuitive Gesture Controls** — menggunakan deteksi landmark tangan yang responsif untuk menggambar, menghapus, hingga memindahkan canvas.
 
-## ✨ Features
+**Two-Handed Manipulation** — implementasi pinch-to-zoom menggunakan deteksi dua tangan secara bersamaan.
 
-- **Gesture-based drawing** — index finger up to draw, no clicking required
-- **Multi-tool system** — Draw / Erase / Move, switchable via the side panel
-- **Two-hand pinch-to-zoom** — bring both index fingers together/apart to zoom the canvas in and out
-- **Undo with a hold gesture** — hold thumb-only pose to trigger undo (with a radial progress indicator)
-- **Clear canvas** — open palm (5 fingers) to wipe everything
-- **Live FX toggles**
-  - 🌟 **Glow** — soft bloom on your strokes
-  - 🪞 **Mirror** — symmetric drawing across the vertical axis
-  - ⚡ **Velocity** — brush size reacts to how fast you move
-  - 🌈 **Rainbow** — auto-cycling stroke color
-- **HSV color spectrum picker** + 16-color quick palette
-- **Particle trail effects** while drawing
-- **Save your canvas** as a PNG anytime
+**Interactive UI Engine** — sistem UI kustom di atas frame OpenCV yang merespons posisi jari (fitur hover-to-select).
 
-## 🎮 Controls
+**Creative Post-Processing** — Glow & Rainbow FX, efek visual berbasis image blending dan HSV color space.
 
-| Gesture | Action |
-|---|---|
-| ☝️ 1 finger (index) | Draw / Erase / Move (depending on active tool) |
-| ✌️ 2 fingers (index + middle) | Stop / hover panel |
-| 🖐️ 5 fingers (open palm) | Clear canvas |
-| 👍 Thumb only, held | Undo |
-| 🤏 Two hands, pinch distance | Zoom canvas in/out |
-| Hover panel item ~0.3s | Select tool / color / toggle |
+**Velocity Scaling** — ukuran brush yang dinamis berdasarkan kecepatan gerakan tangan pengguna.
 
-**Keyboard**
-| Key | Action |
-|---|---|
-| `S` | Save canvas as PNG |
-| `Q` | Quit |
+**Mirror Mode** — dukungan simetri untuk menggambar dua sisi sekaligus.
 
-## 🛠️ Tech Stack
+**Utility** — undo system dengan radial progress indicator, dan one-tap save ke PNG.
 
-- Python 3.11
-- [OpenCV](https://opencv.org/) — video capture, rendering, image ops
-- [MediaPipe](https://developers.google.com/mediapipe) — hand landmark tracking
-- NumPy
+# Kontrol
 
-## 📦 Installation
+Mode utama (index finger): gunakan satu jari telunjuk untuk menggambar, menghapus, atau menggeser posisi canvas tergantung tool yang sedang aktif.
+
+Menu/hover (index + middle): arahkan dua jari ke panel samping untuk memilih tool atau warna. Sistem otomatis melakukan pemilihan setelah hover sekitar 0.3 detik.
+
+Undo (thumb-hold): tunjukkan jempol saja dan tahan sebentar hingga indikator radial di sekitar kursor selesai.
+
+Clear canvas (palm): buka telapak tangan sepenuhnya untuk membersihkan seluruh area canvas seketika.
+
+Zooming (pinch): gunakan kedua tangan sekaligus — aplikasi menghitung jarak antar ujung jari telunjuk untuk melakukan scaling canvas.
+
+Keyboard: `S` untuk save canvas sebagai PNG, `Q` untuk keluar.
+
+# Tech stack
+
+Python 3.11 sebagai bahasa utama. OpenCV menangani video capture, rendering, dan operasi gambar. MediaPipe menangani hand landmark tracking. NumPy dipakai untuk operasi numerik di balik layar (scaling, transformasi koordinat, dan lain-lain).
+
+# Cara menjalankan
 
 ```bash
-git clone https://github.com/<your-username>/GestureCanvas.git
+git clone https://github.com/gwenflfr/GestureCanvas.git
 cd GestureCanvas
-
 python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-
+venv\Scripts\activate      # Mac/Linux: source venv/bin/activate
 pip install -r requirements.txt
 python main.py
 ```
 
-Requires a working webcam. Tested on Python 3.11.9 (MediaPipe does not yet support 3.14).
+Butuh webcam yang aktif. Dikembangkan dan diuji di Python 3.11.9 MediaPipe belum mendukung Python 3.14, jadi pastikan versi Python-nya sesuai sebelum install.
 
-## 📁 Project Structure
+# Struktur proyek
 
-```
-GestureCanvas/
-├── main.py           # App loop, gesture logic, camera capture
-├── hand_tracker.py   # MediaPipe hand detection wrapper
-├── canvas.py          # Drawing canvas, UI panel, effects, state
-└── requirements.txt
-```
+- `main.py` — loop utama, logika gesture-ke-aksi, pembacaan kamera
+- `hand_tracker.py` — wrapper tipis di atas MediaPipe Hands
+- `canvas.py` — canvas gambar, panel UI, state, dan semua efek
 
-## 🚧 Known Limitations / Roadmap
+# Yang masih dikembangkan
 
-- Single-camera only, no multi-camera selection yet
-- No layer system (single flat canvas)
-- Save format limited to PNG
-- Planned: brush presets, export session as video, custom gesture mapping
+Saat ini masih terbatas pada satu kamera default, belum ada pilihan ganti kamera. Belum ada sistem layer, semua tergabung dalam satu canvas flat. Format save juga masih terbatas PNG saja.
 
-## 📄 License
+Ke depannya berencana menambahkan brush preset dan export sesi menggambar sebagai video, plus custom gesture mapping. Ada juga beberapa bug kecil yang belum sempat dibenahi (kadang hover kepencet dobel kalau tangan sedikit gemetar). Kalau menemukan bug lain, silakan buka issue.
 
-MIT — feel free to fork and remix.
+# Lisensi
+
+MIT — silakan fork dan gunakan ulang.
 
 ---
 
-Made by [@gwenflfr](https://github.com/gwenflfr) as part of an ongoing series of creative-tech / computer vision experiments.
+Dibuat oleh [@gwenflfr](https://github.com/gwenflfr), bagian dari eksperimen creative-tech dan computer vision yang sedang berjalan.
