@@ -73,4 +73,4 @@ MIT — silakan fork dan gunakan ulang.
 
 ---
 
-Dibuat oleh Gwen, bagian dari eksperimen creative-tech dan computer vision yang sedang berjalan.
+A project by Gwen, exploring what's possible when computer vision meets creative coding.
