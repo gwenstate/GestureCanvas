@@ -73,4 +73,4 @@ MIT — silakan fork dan gunakan ulang.
 
 ---
 
-Dibuat oleh [@gwenflfr](https://github.com/gwenflfr), bagian dari eksperimen creative-tech dan computer vision yang sedang berjalan.
+Dibuat oleh Gwen, bagian dari eksperimen creative-tech dan computer vision yang sedang berjalan.
