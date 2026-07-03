@@ -10,19 +10,24 @@ Proyek ini dibangun di atas OpenCV dan MediaPipe, dengan pendekatan modular untu
 
 ## Fitur
 
-**Intuitive Gesture Controls** — menggunakan deteksi landmark tangan yang responsif untuk menggambar, menghapus, hingga memindahkan canvas.
+**Intuitive Gesture Controls** menggunakan deteksi landmark tangan yang responsif untuk menggambar, menghapus, hingga memindahkan canvas.
 
-**Two-Handed Manipulation** — implementasi pinch-to-zoom menggunakan deteksi dua tangan secara bersamaan.
+**Two-Handed Manipulation** implementasi pinch-to-zoom menggunakan deteksi dua tangan secara bersamaan.
 
-**Interactive UI Engine** — sistem UI kustom di atas frame OpenCV yang merespons posisi jari (fitur hover-to-select).
+**Interactive UI Engine** 
+sistem UI kustom di atas frame OpenCV yang merespons posisi jari (fitur hover-to-select).
 
-**Creative Post-Processing** — Glow & Rainbow FX, efek visual berbasis image blending dan HSV color space.
+**Creative Post-Processing** 
+Glow & Rainbow FX, efek visual berbasis image blending dan HSV color space.
 
-**Velocity Scaling** — ukuran brush yang dinamis berdasarkan kecepatan gerakan tangan pengguna.
+**Velocity Scaling** 
+ukuran brush yang dinamis berdasarkan kecepatan gerakan tangan pengguna.
 
-**Mirror Mode** — dukungan simetri untuk menggambar dua sisi sekaligus.
+**Mirror Mode** 
+dukungan simetri untuk menggambar dua sisi sekaligus.
 
-**Utility** — undo system dengan radial progress indicator, dan one-tap save ke PNG.
+**Utility** 
+undo system dengan radial progress indicator, dan one-tap save ke PNG.
 
 # Kontrol
 
